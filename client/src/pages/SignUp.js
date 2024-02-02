@@ -52,7 +52,7 @@ const SignUp = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="w-[40%] px-6 py-2 outline-none border-none bg-gray-700 text-black font-semibold tracking-wider rounded-md"
+                className="w-[40%] px-6 py-2 outline-none border-none bg-gray-700 text-white font-semibold tracking-wider rounded-md"
               />
               <input
                 type="email"
@@ -61,7 +61,7 @@ const SignUp = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-[40%] px-6 py-2 outline-none border-none bg-gray-700 text-black font-semibold tracking-wider rounded-md"
+                className="w-[40%] px-6 py-2 outline-none border-none bg-gray-700 text-white font-semibold tracking-wider rounded-md"
               />
               <input
                 type="password"
@@ -70,7 +70,7 @@ const SignUp = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-[40%] px-6 py-2 outline-none border-none bg-gray-700 text-black font-semibold tracking-wider rounded-md"
+                className="w-[40%] px-6 py-2 outline-none border-none bg-gray-700 text-white font-semibold tracking-wider rounded-md"
               />
               <input
                 type="text"
@@ -79,7 +79,7 @@ const SignUp = () => {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 required
-                className="w-[40%] px-6 py-2 outline-none border-none bg-gray-700 text-black font-semibold tracking-wider rounded-md"
+                className="w-[40%] px-6 py-2 outline-none border-none bg-gray-700 text-white font-semibold tracking-wider rounded-md"
               />
               <input
                 type="text"
@@ -88,7 +88,7 @@ const SignUp = () => {
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 required
-                className="w-[40%] px-6 py-2 outline-none border-none bg-gray-700 text-black font-semibold tracking-wider rounded-md"
+                className="w-[40%] px-6 py-2 outline-none border-none bg-gray-700 text-white font-semibold tracking-wider rounded-md"
               />
               <button
                 type="submit"
