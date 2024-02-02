@@ -5,11 +5,13 @@ import authRoutes from "./routes/authRoutes.js";
 import crypto from "crypto";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
+import cors from "cors";
 
 //rest object
 const app = express();
 
 //middlewares
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan("dev"));
