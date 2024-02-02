@@ -1,6 +1,5 @@
 import express, { json } from "express";
 import colors from "colors";
-import config from "./config/index.js";
 import authRoutes from "./routes/authRoutes.js";
 import crypto from "crypto";
 import cookieParser from "cookie-parser";
@@ -33,7 +32,7 @@ console.log(key);
 
 //rest api
 app.use("*", function (req, res) {
-  res.sendFile(path.join("__dirname", "../client/build/index.html"));
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
 export default app;
