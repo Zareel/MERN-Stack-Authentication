@@ -7,7 +7,11 @@ import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import cors from "cors";
 import path from "path";
+import { fileURLToPath } from "url";
 
+//es module fix
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 //rest object
 const app = express();
 
