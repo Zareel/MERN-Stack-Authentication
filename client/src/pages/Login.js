@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Layout from "../components/Layout/Layout";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../context/authContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { auth, setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -17,6 +19,12 @@ const Login = () => {
       });
       if (data.success) {
         alert(data.message);
+        setAuth({
+          ...auth,
+          user: data.user,
+          token: data.token,
+        });
+        localStorage.setItem("auth", JSON.stringify(data));
         navigate("/");
       } else {
         alert(data.message);
