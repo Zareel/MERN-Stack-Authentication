@@ -1,3 +1,0 @@
-# MERN Stack
-
-# Authentication
