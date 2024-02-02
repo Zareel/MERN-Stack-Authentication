@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout/Layout";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -7,10 +9,29 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(name, email, password, phone, address);
+    //console.log(name, email, password, phone, address);
+    try {
+      const { data } = await axios.post("/api/v1/auth/signup", {
+        name,
+        email,
+        password,
+        phone,
+        address,
+      });
+      if (data.success) {
+        alert(data.message);
+        navigate("/login");
+      } else {
+        alert(data.error.message);
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Something went wrong in signing in");
+    }
   };
 
   return (
