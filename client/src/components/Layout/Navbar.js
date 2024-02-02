@@ -46,7 +46,7 @@ const Navbar = () => {
                 </NavLink>
                 <NavLink
                   onClick={handleLogOut}
-                  className="text-lg hover:underline"
+                  className="text-xl hover:underline"
                 >
                   LogOut
                 </NavLink>
