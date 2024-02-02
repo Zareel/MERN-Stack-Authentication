@@ -1,3 +1,4 @@
+import { config } from "dotenv";
 import User from "../models/userSchema.js";
 
 //cookie options
@@ -52,6 +53,56 @@ export const signUp = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Error in signing up",
+      error,
+    });
+  }
+};
+
+//login || method:post || /api/v1/auth/login
+export const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid email or password",
+      });
+    }
+    const user = await User.findOne({ email }).select("+password");
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "No user found, please sign up",
+      });
+    }
+    const isPasswordMatched = await user.comparePassword(password);
+    if (!isPasswordMatched) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid password",
+      });
+    }
+    const token = user.getJWTtoken();
+    user.password = undefined;
+    res.cookie("token", token, cookieOptions);
+    res.status(200).json({
+      success: true,
+      message: "User logged in successfully",
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        address: user.address,
+        role: user.role,
+      },
+      token,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Error in logging in",
       error,
     });
   }
