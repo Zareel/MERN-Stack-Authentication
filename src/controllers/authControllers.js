@@ -107,3 +107,24 @@ export const login = async (req, res) => {
     });
   }
 };
+
+//logout || method:post || /api/v1/auth/logout
+export const logOut = async (req, res) => {
+  try {
+    res.cookie("token", null, {
+      expires: new Date(Date.now()),
+      httpOnly: true,
+    });
+    res.status(200).json({
+      success: true,
+      message: "User has been loggedOut successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Error in Logging out",
+      error,
+    });
+  }
+};
