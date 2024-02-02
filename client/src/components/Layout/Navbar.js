@@ -1,7 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import AuthContext from "../../context/authContext";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const { auth, setAuth } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogOut = async () => {
+    try {
+      const { data } = await axios.post("/api/v1/auth/logout");
+      if (data.success) {
+        alert(data.message);
+        setAuth({
+          ...auth,
+          user: null,
+          token: "",
+        });
+        localStorage.removeItem("auth");
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Something went wrong while logging out");
+    }
+  };
+
   return (
     <div className="w-full h-20 bg-blue-900 text-gray-300">
       <nav className="max-w-7xl mx-auto h-full flex justify-between items-center">
@@ -11,19 +36,32 @@ const Navbar = () => {
             <NavLink className="text-lg hover:underline" to="/">
               Home
             </NavLink>
-            <NavLink className="text-lg hover:underline" to="about">
-              About
-            </NavLink>
-            <NavLink className="text-lg hover:underline" to="/contact">
-              Contact
-            </NavLink>
-            <NavLink className="text-lg hover:underline" to="/login">
-              Login
-            </NavLink>
+            {auth.user ? (
+              <div className="flex gap-6">
+                <NavLink className="text-lg hover:underline" to="about">
+                  About
+                </NavLink>
+                <NavLink className="text-lg hover:underline" to="/contact">
+                  Contact
+                </NavLink>
+                <NavLink
+                  onClick={handleLogOut}
+                  className="text-lg hover:underline"
+                >
+                  LogOut
+                </NavLink>
+              </div>
+            ) : (
+              <div className="flex gap-6">
+                <NavLink className="text-lg hover:underline" to="/login">
+                  Login
+                </NavLink>
+                <NavLink className="px-6 py-2 bg-white text-black" to="/signup">
+                  SignUp
+                </NavLink>
+              </div>
+            )}
           </ul>
-          <NavLink className="px-6 py-2 bg-white text-black" to="/signup">
-            SignUp
-          </NavLink>
         </div>
       </nav>
     </div>
