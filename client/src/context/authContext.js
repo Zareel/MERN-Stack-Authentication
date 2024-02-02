@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
@@ -7,6 +7,18 @@ export const ContextProvider = ({ children }) => {
     user: null,
     token: "",
   });
+  useEffect(() => {
+    const data = localStorage.getItem("auth");
+    if (data) {
+      const parseData = JSON.parse(data);
+      setAuth({
+        ...auth,
+        user: parseData.user,
+        token: parseData.token,
+      });
+    }
+    //eslint-disable-next-line
+  }, []);
   const value = {
     auth,
     setAuth,
