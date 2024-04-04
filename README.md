@@ -7,4 +7,4 @@
 ## Login
 
 ## LogOut
-![live @](https://z-authentication.cyclic.app/)
+[live @](https://z-authentication.cyclic.app/)
