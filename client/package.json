@@ -1,6 +1,6 @@
 {
   "name": "app",
-  "proxy": "https://mern-stack-authentication-backend.onrender.com",
+  "proxy": "http://localhost:4000",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
